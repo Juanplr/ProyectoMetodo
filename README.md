@@ -2,13 +2,13 @@
 ## Actualizacion del Proyecto se implemento el avance de los pacientes con las funciones del CRUD
 ## lo que se hizo en la base de Datos es que se crearon dos vistas las cuales puedes crearlas 
 vista 1:
-CREATE VIEW `vpacientes` AS select  id,
+`CREATE VIEW 'vpacientes' AS select  id,
 nombre,
 fecha_nacimiento,
 estado_civil,
 nivel_estudios,
 ocupacion from paciente
-where papeleria =0;
+where papeleria =0;`
 
 vista 2:
 

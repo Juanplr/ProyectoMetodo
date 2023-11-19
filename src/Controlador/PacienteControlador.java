@@ -6,6 +6,7 @@ import Modelo.PersonalTableModel;
 import Vista.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
 public class PacienteControlador implements ActionListener{
 
@@ -34,12 +35,12 @@ public class PacienteControlador implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        Modelo m = new Modelo();
         if(e.getSource()==ventana.btAgregar){
             try {
                 Paciente np = new Paciente();
-                Modelo m = new Modelo();
-
+                SimpleDateFormat formato =new SimpleDateFormat("dd-MM-yyyy");
+                String fecha;
                 // Verifica que el campo de ID no esté vacío antes de intentar la conversión
                 if (!ventana.txtId.getText().isEmpty()) {
                     np.setId(Integer.parseInt(ventana.txtId.getText()));
@@ -47,9 +48,9 @@ public class PacienteControlador implements ActionListener{
                     System.out.println("El campo ID no puede estar vacío.");
                     return;
                 }
-
+                fecha = formato.format(ventana.txtFecha.getDate());
                 np.setNombre(ventana.txtNombre.getText());
-                np.setFechaN(ventana.txtFecha.getText());
+                np.setFechaN(fecha);
                 np.setEstadoC(ventana.txtEstadoC.getSelectedItem().toString());
                 np.setNivelEstud(ventana.txtNE.getSelectedItem().toString());
                 np.setOcupacion(ventana.txtOcupacion.getText());  
@@ -66,13 +67,16 @@ public class PacienteControlador implements ActionListener{
         }
         if(e.getSource() == ventana.btModificar){
             Paciente pa = new Paciente();
+            SimpleDateFormat formato =new SimpleDateFormat("dd-MM-yyyy");
+            String fecha;
+            fecha = formato.format(ventana.txtFecha.getDate());
+            
             pa.setId(Integer.parseInt(ventana.txtId.getText()));
             pa.setNombre(ventana.txtNombre.getText());
-            pa.setFechaN(ventana.txtFecha.getText());
+            pa.setFechaN(fecha);
             pa.setEstadoC(ventana.txtEstadoC.getSelectedItem().toString());
             pa.setNivelEstud(ventana.txtNE.getSelectedItem().toString());
             pa.setOcupacion(ventana.txtOcupacion.getText());
-            Modelo m = new Modelo();
             m.ActualizarPaciente(pa);
             iniciar();
             limpiar();
@@ -91,7 +95,7 @@ public class PacienteControlador implements ActionListener{
     private void limpiar(){
         ventana.txtId.setText("");
         ventana.txtNombre.setText("");
-        ventana.txtFecha.setText("");
+        ventana.txtFecha.setCalendar(null);
         ventana.txtEstadoC.setSelectedIndex(0);
         ventana.txtNE.setSelectedIndex(0);
         ventana.txtOcupacion.setText("");  

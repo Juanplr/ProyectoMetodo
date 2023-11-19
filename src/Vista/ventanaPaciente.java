@@ -2,6 +2,12 @@ package Vista;
 
 import Controlador.PacienteControlador;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,6 +29,7 @@ public class ventanaPaciente extends javax.swing.JFrame {
         btAgregar.addActionListener(controlador);
         btModificar.addActionListener(controlador);
         btEliminar.addActionListener(controlador);
+        txtFecha.setDateFormatString("dd-MM-yyyy");
     }
 
     /**
@@ -50,7 +57,7 @@ public class ventanaPaciente extends javax.swing.JFrame {
         btEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaP = new javax.swing.JTable();
-        txtFecha = new javax.swing.JTextField();
+        txtFecha = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,7 +119,7 @@ public class ventanaPaciente extends javax.swing.JFrame {
                             .addComponent(txtOcupacion, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                             .addComponent(txtEstadoC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtNE, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtFecha))
+                            .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(86, 86, 86)
                         .addComponent(btAgregar)
                         .addGap(55, 55, 55)
@@ -147,13 +154,13 @@ public class ventanaPaciente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtNE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,14 +168,21 @@ public class ventanaPaciente extends javax.swing.JFrame {
 
     
 private void jTable1MousePressed(MouseEvent evt) {
-    int fila = tablaP.getSelectedRow();
-    txtId.setEnabled(false);
-    txtId.setText(tablaP.getValueAt(fila, 0).toString());
-    txtNombre.setText(tablaP.getValueAt(fila, 1).toString());
-    txtOcupacion.setText(tablaP.getValueAt(fila, 5).toString());
-    txtEstadoC.setSelectedItem(tablaP.getValueAt(fila, 3).toString());
-    txtNE.setSelectedItem(tablaP.getValueAt(fila, 4).toString());
-    txtFecha.setText(tablaP.getValueAt(fila, 2).toString());
+        try {
+            int fila = tablaP.getSelectedRow();
+            txtId.setEnabled(false);
+            String fechaSeleccionada = tablaP.getValueAt(fila, 2).toString();
+            DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+            Date fecha = df.parse(fechaSeleccionada);
+            txtId.setText(tablaP.getValueAt(fila, 0).toString());
+            txtNombre.setText(tablaP.getValueAt(fila, 1).toString());
+            txtOcupacion.setText(tablaP.getValueAt(fila, 5).toString());
+            txtEstadoC.setSelectedItem(tablaP.getValueAt(fila, 3).toString());
+            txtNE.setSelectedItem(tablaP.getValueAt(fila, 4).toString());
+            txtFecha.setDate(fecha);
+        } catch (ParseException ex) {
+            Logger.getLogger(ventanaPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -184,7 +198,7 @@ private void jTable1MousePressed(MouseEvent evt) {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tablaP;
     public javax.swing.JComboBox<String> txtEstadoC;
-    public javax.swing.JTextField txtFecha;
+    public com.toedter.calendar.JDateChooser txtFecha;
     public javax.swing.JTextField txtId;
     public javax.swing.JComboBox<String> txtNE;
     public javax.swing.JTextField txtNombre;
