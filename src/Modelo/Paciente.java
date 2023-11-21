@@ -1,14 +1,7 @@
 package Modelo;
 
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-/**
- *
- * @author juanl
- */
+
 public class Paciente {
     private int id;
     private String nombre;
@@ -16,9 +9,11 @@ public class Paciente {
     private String estadoC;
     private String nivelEstud;
     private String ocupacion;
-
+    private int estado;
     public Paciente(){
+        this.estado = 0;
     }
+
     public Paciente(int id, String nombre, String fechaN, String estadoC, String nivelEstud, String ocupacion) {
         this.id = id;
         this.nombre = nombre;
@@ -26,7 +21,17 @@ public class Paciente {
         this.estadoC = estadoC;
         this.nivelEstud = nivelEstud;
         this.ocupacion = ocupacion;
+        this.estado = 0;
     }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
 
     public int getId() {
         return id;
