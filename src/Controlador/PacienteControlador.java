@@ -41,13 +41,6 @@ public class PacienteControlador implements ActionListener{
                 Paciente np = new Paciente();
                 SimpleDateFormat formato =new SimpleDateFormat("dd-MM-yyyy");
                 String fecha;
-                // Verifica que el campo de ID no esté vacío antes de intentar la conversión
-                if (!ventana.txtId.getText().isEmpty()) {
-                    np.setId(Integer.parseInt(ventana.txtId.getText()));
-                } else {
-                    System.out.println("El campo ID no puede estar vacío.");
-                    return;
-                }
                 fecha = formato.format(ventana.txtFecha.getDate());
                 np.setNombre(ventana.txtNombre.getText());
                 np.setFechaN(fecha);
@@ -90,6 +83,11 @@ public class PacienteControlador implements ActionListener{
             limpiar();
             ventana.txtId.setEnabled(true);
         }
+        if(e.getSource() == ventana.btnCerrar){
+            MainWindow home = new MainWindow();
+            ventana.setVisible(false);
+            home.setVisible(true);
+        }
     }
     
     private void limpiar(){
@@ -98,7 +96,9 @@ public class PacienteControlador implements ActionListener{
         ventana.txtFecha.setCalendar(null);
         ventana.txtEstadoC.setSelectedIndex(0);
         ventana.txtNE.setSelectedIndex(0);
-        ventana.txtOcupacion.setText("");  
+        ventana.txtOcupacion.setText("");
+        ventana.txtId.setVisible(false);
+        ventana.jLabel1.setVisible(false);
     }
     
 }

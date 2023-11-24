@@ -48,11 +48,13 @@ public class PersonalTableModel extends AbstractTableModel{
         return c;
     }
     public String getColumnName(int ci){
+        String nombre = null;
         String name=null;
         try {
             ResultSetMetaData rsmd= rs.getMetaData();
             name = rsmd.getColumnName(ci+1);
         } catch (Exception e) {e.printStackTrace();}
+        name = name.replaceAll("\\_", " ");
         return name;
     }
 }

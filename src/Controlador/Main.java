@@ -1,6 +1,7 @@
 package Controlador;
 
 import Vista.Login;
+import Vista.Pacientes;
 
 
 public class Main {
@@ -9,7 +10,10 @@ public class Main {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+               Pacientes l =  new Pacientes();
+               l.setDefaultCloseOperation(l.EXIT_ON_CLOSE);
+               l.setVisible(true);
+                
             }
         });
     }

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Login;
 import Vista.MainWindow;
+import Vista.Pacientes;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -30,7 +31,12 @@ public class LoginControlador implements ActionListener, KeyListener{
        if(e.getSource()== ventana.btLogin){
            String usuario = ventana.txtUser.getText();
            String contrasena = new String(ventana.txtpassw.getPassword());
-            acceso(usuario, contrasena);
+           acceso(usuario, contrasena);
+        }
+       if(e.getSource() == ventana.btnUsuarios){
+           String usuario = ventana.txtUser.getText();
+           String contrasena = new String(ventana.txtpassw.getPassword());
+           accesoAdmin(usuario, contrasena);
        }
     }
 
@@ -76,6 +82,25 @@ public class LoginControlador implements ActionListener, KeyListener{
             }
         }
     }
-    
+     private void accesoAdmin(String usuario, String contrasena){
+        if(usuario.equals("")|| contrasena.equals("")){
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Debe llenar todos los campos \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
+        }else{
+            if(modelo.verificarUsuarioAdmin(usuario, contrasena)){
+                try {
+                    javax.swing.JOptionPane.showMessageDialog(ventana, "Bienvenido " + usuario+"! :) \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    Pacientes home = new Pacientes();
+                    ventana.setVisible(false);
+                    home.setVisible(true);
+                }catch(HeadlessException e) {
+                    System.out.println(e);
+                }
+            }else{
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Usuario o contraseña incorrecta!!\n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
+                limpiar();
+            }
+        }
+    }
     
 }

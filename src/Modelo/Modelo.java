@@ -4,8 +4,6 @@ import Controlador.Conector;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class Modelo {
@@ -70,14 +68,13 @@ public class Modelo {
         System.out.println("Nombre: " + paciente.getNombre());
         // ... Agrega más mensajes para otros valores
 
-        PreparedStatement ps = conexion.prepareStatement("INSERT INTO paciente (id, nombre, fecha_nacimiento, estado_civil, nivel_estudios, ocupacion, papeleria) VALUES (?, ?, ?, ?, ?, ?,?)");
-        ps.setInt(1, paciente.getId());
-        ps.setString(2, paciente.getNombre());
-        ps.setString(3, paciente.getFechaN());
-        ps.setString(4, paciente.getEstadoC());
-        ps.setString(5, paciente.getNivelEstud());
-        ps.setString(6, paciente.getOcupacion());
-        ps.setInt(7, paciente.getEstado());
+        PreparedStatement ps = conexion.prepareStatement("INSERT INTO paciente ( nombre, fecha_nacimiento, estado_civil, nivel_estudios, ocupacion, papeleria) VALUES (?, ?, ?, ?, ?, ?)");
+        ps.setString(1, paciente.getNombre());
+        ps.setString(2, paciente.getFechaN());
+        ps.setString(3, paciente.getEstadoC());
+        ps.setString(4, paciente.getNivelEstud());
+        ps.setString(5, paciente.getOcupacion());
+        ps.setInt(6, paciente.getEstado());
         ps.execute(); 
         ps.close(); 
         cn.cerrarconexion(); 
@@ -85,6 +82,51 @@ public class Modelo {
         ex.printStackTrace();
     }
 }
+
+    public boolean verificarUsuarioAdmin(String usuario, String contrasena) {
+        boolean verificacion =false;
+        try {
+               conexion = cn.conectar();
+               Statement stm;
+                String sql ="select * from admini " 
+                        + "where nombre_usuario= '"+usuario+"' and contrasena_usuario='"+contrasena+"'";
+                stm = conexion.createStatement();
+                ResultSet resultado = stm.executeQuery(sql);
+                if(resultado.next()){
+                    verificacion = true;
+                }else{
+                   verificacion = false;
+                }
+                cn.cerrarconexion();
+            } catch (SQLException ex) {
+                System.err.println(ex);
+            }
+        return verificacion;
+    }
+    public ResultSet getUsuarios() {
+        ResultSet rs=null;
+        try {
+            conexion = cn.conectar();
+            Statement smt;
+            smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            String sql= "SELECT nombre_usuario, rol, nombre_completo, cedula FROM usuarios;";
+            rs= smt.executeQuery(sql);
+            //cn.cerrarconexion();
+        } catch (Exception e) {e.printStackTrace();}
+        return rs;
+    }
+    public ResultSet getUsuariosEspecificos(String tipo) {
+        ResultSet rs=null;
+        try {
+            conexion = cn.conectar();
+            Statement smt;
+            smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            String sql= "SELECT nombre_usuario, rol, nombre_completo, cedula  FROM usuarios where rol ='" +tipo +"';";
+            rs= smt.executeQuery(sql);
+            //cn.cerrarconexion();
+        } catch (Exception e) {e.printStackTrace();}
+        return rs;
+    }
 
     
 }

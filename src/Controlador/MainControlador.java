@@ -34,6 +34,16 @@ public class MainControlador implements ActionListener{
             ventana.setVisible(false);
             home.setVisible(true);
         }
+        if(e.getSource() == ventana.btConsultas){
+            Calendario home = new Calendario();
+            ventana.setVisible(false);
+            home.setVisible(true);
+        }
+        if(e.getSource() == ventana.btnPsicologo){
+            Pacientes home = new Pacientes();
+            ventana.setVisible(false);
+            home.setVisible(true);
+        }
     }
     
 }

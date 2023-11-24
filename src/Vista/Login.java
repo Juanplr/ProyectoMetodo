@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         btLogin.addActionListener(controlador);
+        btnUsuarios.addActionListener(controlador);
         this.setLocationRelativeTo(null);
         this.pintarimagen(this.login, "src\\images\\wallpaper2.jpg");
         txtUser.addKeyListener(controlador);
@@ -44,6 +45,7 @@ public class Login extends javax.swing.JFrame {
         lblUserName1 = new java.awt.Label();
         txtpassw = new javax.swing.JPasswordField();
         btLogin = new javax.swing.JButton();
+        btnUsuarios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +65,8 @@ public class Login extends javax.swing.JFrame {
         lblUserName1.setText("Password");
 
         btLogin.setText("Login");
+
+        btnUsuarios.setText("Usuarios");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -89,7 +93,11 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(btLogin)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUsuarios)
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +113,9 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(txtpassw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(btLogin)
-                .addGap(44, 44, 44))
+                .addGap(15, 15, 15)
+                .addComponent(btnUsuarios)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,6 +140,7 @@ public class Login extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btLogin;
+    public javax.swing.JButton btnUsuarios;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private java.awt.Label lblUserName;
