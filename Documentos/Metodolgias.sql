@@ -9,7 +9,8 @@ nombre varchar(30)not null,
 fecha_nacimiento varchar(40) not null,
 estado_civil varchar(30),
 nivel_estudios varchar(30),
-ocupacion varchar(30) not null
+ocupacion varchar(30) not null,
+papaelria integer not null
 );
 
 drop table usuarios;
