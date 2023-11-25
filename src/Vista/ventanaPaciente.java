@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.PacienteControlador;
+import Modelo.Usuario;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -16,8 +17,10 @@ import java.util.logging.Logger;
 public class ventanaPaciente extends javax.swing.JFrame {
 
     PacienteControlador controlador = new PacienteControlador(this);
-    public ventanaPaciente() {
+    public Usuario user;
+    public ventanaPaciente(Usuario user) {
         this.setUndecorated(true);
+        this.user = user;
         initComponents();
         this.setLocationRelativeTo(null);
         controlador.iniciar();

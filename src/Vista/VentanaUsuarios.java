@@ -5,18 +5,22 @@
 package Vista;
 
 import Controlador.UsuariosControlador;
+import Modelo.Usuario;
 import java.awt.event.MouseEvent;
 
 /**
  *
  * @author inigu
  */
-public class Pacientes extends javax.swing.JFrame {
+public class VentanaUsuarios extends javax.swing.JFrame {
     UsuariosControlador controlador = new UsuariosControlador(this);
+    public Usuario user;
     /**
      * Creates new form Pacientes
+     * @param user
      */
-    public Pacientes() {
+    public VentanaUsuarios(Usuario user) {
+        this.user = user;
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -66,6 +70,7 @@ public class Pacientes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
         datosT = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,7 +92,7 @@ public class Pacientes extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Cedula profesional");
 
-        txtTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingrese un tipo", "Psicologo", "Asistente" }));
+        txtTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingrese un tipo", "Psicologo", "Asistente", "Administrador" }));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -127,8 +132,9 @@ public class Pacientes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaUsuarios);
 
-        datosT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Asistentes", "Psicologos" }));
+        datosT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Asistentes", "Psicologos", "Administrador" }));
 
+        jButton1.setText("Agregar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -232,6 +238,8 @@ private void jTable1MousePressed(MouseEvent evt) {
     txtNombre.setText(tablaUsuarios.getValueAt(fila, 2).toString());
     txtCP.setEditable(true);
     txtCP.setText(tablaUsuarios.getValueAt(fila, 3).toString());
+    txtNomUser.setEditable(false);
+    txtPassw.setText(tablaUsuarios.getValueAt(fila, 4).toString());
     }catch(Exception e){}
 }
 
@@ -241,6 +249,7 @@ private void jTable1MousePressed(MouseEvent evt) {
     public javax.swing.JButton btnEditar;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JComboBox<String> datosT;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

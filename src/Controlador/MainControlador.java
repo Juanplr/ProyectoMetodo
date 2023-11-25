@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class MainControlador implements ActionListener{
  private MainWindow ventana;
-    private final Modelo modelo = new Modelo();
+ private final Modelo modelo = new Modelo();
 
     public MainControlador(MainWindow ventana) {
         this.ventana = ventana;
@@ -30,19 +30,28 @@ public class MainControlador implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== ventana.btPacientes){
-            ventanaPaciente home = new ventanaPaciente();
+            ventanaPaciente home = new ventanaPaciente(ventana.user);
             ventana.setVisible(false);
             home.setVisible(true);
         }
-        if(e.getSource() == ventana.btConsultas){
-            Calendario home = new Calendario();
+        if(e.getSource() == ventana.btCitas){
+            Calendario home = new Calendario(ventana.user);
             ventana.setVisible(false);
             home.setVisible(true);
         }
-        if(e.getSource() == ventana.btnPsicologo){
-            Pacientes home = new Pacientes();
+        if(e.getSource() == ventana.btnUsuarios){
+            VentanaUsuarios home = new VentanaUsuarios(ventana.user);
             ventana.setVisible(false);
             home.setVisible(true);
+        }
+        if(e.getSource() == ventana.btCalendario){
+           
+        }
+        if(e.getSource() == ventana.btnAdminCitas){
+           
+        }
+        if(e.getSource() == ventana.btnHistorialP){
+           
         }
     }
     

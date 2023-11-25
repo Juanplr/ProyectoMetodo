@@ -1,7 +1,6 @@
 package Controlador;
 
-import Modelo.Modelo;
-import Modelo.Paciente;
+import Modelo.*;
 import Modelo.PersonalTableModel;
 import Vista.*;
 import java.awt.event.ActionEvent;
@@ -84,7 +83,7 @@ public class PacienteControlador implements ActionListener{
             ventana.txtId.setEnabled(true);
         }
         if(e.getSource() == ventana.btnCerrar){
-            MainWindow home = new MainWindow();
+            MainWindow home = new MainWindow(ventana.user);
             ventana.setVisible(false);
             home.setVisible(true);
         }

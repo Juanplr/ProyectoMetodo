@@ -2,11 +2,11 @@ package Controlador;
 
 
 import Modelo.Modelo;
+import Modelo.Usuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Login;
 import Vista.MainWindow;
-import Vista.Pacientes;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,6 +14,7 @@ import java.awt.event.KeyListener;
 public class LoginControlador implements ActionListener, KeyListener{
     private Login ventana;
     private final Modelo modelo = new Modelo();
+    Usuario user;
     public LoginControlador(Login ventana) {
         this.ventana = ventana;
     }
@@ -33,11 +34,6 @@ public class LoginControlador implements ActionListener, KeyListener{
            String contrasena = new String(ventana.txtpassw.getPassword());
            acceso(usuario, contrasena);
         }
-       if(e.getSource() == ventana.btnUsuarios){
-           String usuario = ventana.txtUser.getText();
-           String contrasena = new String(ventana.txtpassw.getPassword());
-           accesoAdmin(usuario, contrasena);
-       }
     }
 
     @Override
@@ -68,29 +64,10 @@ public class LoginControlador implements ActionListener, KeyListener{
                 limpiar();
         }else{
             if(modelo.verificarUsuario(usuario, contrasena)){
+                user = modelo.getUser(usuario);
                 try {
                     javax.swing.JOptionPane.showMessageDialog(ventana, "Bienvenido " + usuario+"! :) \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                    MainWindow home = new MainWindow();
-                    ventana.setVisible(false);
-                    home.setVisible(true);
-                }catch(HeadlessException e) {
-                    System.out.println(e);
-                }
-            }else{
-                javax.swing.JOptionPane.showMessageDialog(ventana, "Usuario o contraseña incorrecta!!\n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
-                limpiar();
-            }
-        }
-    }
-     private void accesoAdmin(String usuario, String contrasena){
-        if(usuario.equals("")|| contrasena.equals("")){
-                javax.swing.JOptionPane.showMessageDialog(ventana, "Debe llenar todos los campos \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                limpiar();
-        }else{
-            if(modelo.verificarUsuarioAdmin(usuario, contrasena)){
-                try {
-                    javax.swing.JOptionPane.showMessageDialog(ventana, "Bienvenido " + usuario+"! :) \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                    Pacientes home = new Pacientes();
+                    MainWindow home = new MainWindow(user);
                     ventana.setVisible(false);
                     home.setVisible(true);
                 }catch(HeadlessException e) {

@@ -60,48 +60,27 @@ public class Modelo {
     }
     
     public void agregarPaciente(Paciente paciente) {
-    try {
-        conexion = cn.conectar();
-        
-        // Agrega mensajes de depuración para verificar los valores
-        System.out.println("ID: " + paciente.getId());
-        System.out.println("Nombre: " + paciente.getNombre());
-        // ... Agrega más mensajes para otros valores
-
-        PreparedStatement ps = conexion.prepareStatement("INSERT INTO paciente ( nombre, fecha_nacimiento, estado_civil, nivel_estudios, ocupacion, papeleria) VALUES (?, ?, ?, ?, ?, ?)");
-        ps.setString(1, paciente.getNombre());
-        ps.setString(2, paciente.getFechaN());
-        ps.setString(3, paciente.getEstadoC());
-        ps.setString(4, paciente.getNivelEstud());
-        ps.setString(5, paciente.getOcupacion());
-        ps.setInt(6, paciente.getEstado());
-        ps.execute(); 
-        ps.close(); 
-        cn.cerrarconexion(); 
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-    }
-}
-
-    public boolean verificarUsuarioAdmin(String usuario, String contrasena) {
-        boolean verificacion =false;
         try {
-               conexion = cn.conectar();
-               Statement stm;
-                String sql ="select * from admini " 
-                        + "where nombre_usuario= '"+usuario+"' and contrasena_usuario='"+contrasena+"'";
-                stm = conexion.createStatement();
-                ResultSet resultado = stm.executeQuery(sql);
-                if(resultado.next()){
-                    verificacion = true;
-                }else{
-                   verificacion = false;
-                }
-                cn.cerrarconexion();
-            } catch (SQLException ex) {
-                System.err.println(ex);
-            }
-        return verificacion;
+            conexion = cn.conectar();
+
+            // Agrega mensajes de depuración para verificar los valores
+            System.out.println("ID: " + paciente.getId());
+            System.out.println("Nombre: " + paciente.getNombre());
+            // ... Agrega más mensajes para otros valores
+
+            PreparedStatement ps = conexion.prepareStatement("INSERT INTO paciente ( nombre, fecha_nacimiento, estado_civil, nivel_estudios, ocupacion, papeleria) VALUES (?, ?, ?, ?, ?, ?)");
+            ps.setString(1, paciente.getNombre());
+            ps.setString(2, paciente.getFechaN());
+            ps.setString(3, paciente.getEstadoC());
+            ps.setString(4, paciente.getNivelEstud());
+            ps.setString(5, paciente.getOcupacion());
+            ps.setInt(6, paciente.getEstado());
+            ps.execute(); 
+            ps.close(); 
+            cn.cerrarconexion(); 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
     public ResultSet getUsuarios() {
         ResultSet rs=null;
@@ -109,7 +88,7 @@ public class Modelo {
             conexion = cn.conectar();
             Statement smt;
             smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            String sql= "SELECT nombre_usuario, rol, nombre_completo, cedula FROM usuarios;";
+            String sql= "SELECT nombre_usuario, rol, nombre_completo, cedula, contrasena_usuario FROM usuarios;";
             rs= smt.executeQuery(sql);
             //cn.cerrarconexion();
         } catch (Exception e) {e.printStackTrace();}
@@ -121,12 +100,68 @@ public class Modelo {
             conexion = cn.conectar();
             Statement smt;
             smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            String sql= "SELECT nombre_usuario, rol, nombre_completo, cedula  FROM usuarios where rol ='" +tipo +"';";
+            String sql= "SELECT nombre_usuario, rol, nombre_completo, cedula,contrasena_usuario  FROM usuarios where rol ='" +tipo +"';";
             rs= smt.executeQuery(sql);
             //cn.cerrarconexion();
         } catch (Exception e) {e.printStackTrace();}
         return rs;
     }
 
-    
+    public void agregarUsuario(Usuario user) {
+        try {
+            conexion = cn.conectar();
+
+            PreparedStatement ps = conexion.prepareStatement("INSERT INTO `usuarios`(`nombre_usuario`,`rol`,`nombre_completo`,`contrasena_usuario`,`cedula`) VALUES (?,?,?,?,?);");
+            ps.setString(1, user.getNombreU());
+            ps.setString(2, user.getTipo());
+            ps.setString(3, user.getNombreC());
+            ps.setString(4, user.getPassw());
+            ps.setInt(5, user.getCedula());
+            ps.execute(); 
+            ps.close(); 
+            cn.cerrarconexion(); 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }  
+    }    
+    public void eliminarUsuario(Usuario user) {
+        try {
+            conexion = cn.conectar();
+
+            PreparedStatement ps = conexion.prepareStatement("delete from `usuarios` "+"where nombre_usuario='"+user.getNombreU()+"';");
+            ps.execute(); 
+            ps.close(); 
+            cn.cerrarconexion(); 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }  
+    }
+
+    public Usuario getUser(String usuario) {
+        Usuario u = new Usuario();
+        ResultSet rs=null;
+        try {
+            conexion = cn.conectar();
+            Statement smt;
+            smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            String sql= "SELECT *  FROM usuarios where nombre_usuario ='" +usuario +"';";
+            rs= smt.executeQuery(sql);
+            while(rs.next()){
+                u.setNombreU(rs.getString(1));
+                u.setTipo(rs.getString(2));
+                u.setNombreC(rs.getString(3));
+                u.setPassw(rs.getString(4));
+                u.setCedula(rs.getInt(5));
+            }
+        } catch (Exception e) {e.printStackTrace();}
+        return u;
+    }
+
+    public void EditarUsuario(Usuario user) {
+        try {
+            conexion = cn.conectar();
+            PreparedStatement ps = conexion.prepareStatement("update usuarios set nombre_usuario='"+user.getNombreU()+"',rol='"+user.getTipo()+"', nombre_completo='"+user.getNombreC()+"',contrasena_usuario='"+user.getPassw()+"',cedula='"+user.getCedula()+"' where nombre_usuario='"+user.getNombreU()+"';");
+            ps.executeUpdate();
+        } catch (Exception e) {e.printStackTrace();}
+    }
 }
