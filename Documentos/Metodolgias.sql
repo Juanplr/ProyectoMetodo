@@ -4,13 +4,12 @@ drop database metodologias_2;
 
 drop table paciente;
 create table paciente(
-id integer primary key,
+id integer primary key AUTO_INCREMENT,
 nombre varchar(30)not null,
 fecha_nacimiento varchar(40) not null,
 estado_civil varchar(30),
 nivel_estudios varchar(30),
-ocupacion varchar(30) not null,
-papaelria integer not null
+ocupacion varchar(30) not null
 );
 
 drop table usuarios;
@@ -20,12 +19,6 @@ rol varchar(30) not null,
 nombre_completo  varchar(30),
 contrasena_usuario varchar(30) not null,
 cedula integer null
-);
-
-drop table adminni;
-create table adminni(
-nombre_usuario varchar(30) primary key,
-contrasena_usuario varchar(30) not null
 );
 
 #Vistas
@@ -63,10 +56,15 @@ VIEW `metodologias_2`.`vpacientes` AS
     WHERE
         (`metodologias_2`.`paciente`.`papeleria` = 0);
         
-insert into admini values("admin","qwerty");
-
+        
+drop table registro;        
+create table registro(
+id integer primary key AUTO_INCREMENT,
+informacion varchar(50)
+);
+        
+insert into usuarios values("admin","Administrador","JJ","qwerty",1234572);
 insert into usuarios values("soka","Psicologo","Juan Pablo Lazaro Ruiz","Perrotonto",12345);
 insert into usuarios values("frantata","Asistente","Francisco Angel Reyes Jacome","1234",null);
 insert into usuarios values("Manu","Psicologo","Jose Manuel Iñiguez Lopez","Gatolisto",6789);
 insert into usuarios values("Dangj","Asistente","Daniel Garcia Jacome","Pokemon",null);
-
