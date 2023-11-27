@@ -57,6 +57,17 @@ VIEW `metodologias_2`.`vpacientes` AS
         (`metodologias_2`.`paciente`.`papeleria` = 0);
         
         
+drop table cita;
+create table cita(
+nombre_usuario varchar(30),
+id integer,
+fechaC varchar(40) not null,
+hora varchar(10) not null,
+primary key(nombre_usuario, id),
+foreign key(nombre_usuario) references usuarios(nombre_usuario),
+foreign key(id) references paciente(id)
+);  
+        
 drop table registro;        
 create table registro(
 id integer primary key AUTO_INCREMENT,
@@ -68,3 +79,8 @@ insert into usuarios values("soka","Psicologo","Juan Pablo Lazaro Ruiz","Perroto
 insert into usuarios values("frantata","Asistente","Francisco Angel Reyes Jacome","1234",null);
 insert into usuarios values("Manu","Psicologo","Jose Manuel Iñiguez Lopez","Gatolisto",6789);
 insert into usuarios values("Dangj","Asistente","Daniel Garcia Jacome","Pokemon",null);
+
+
+
+
+
