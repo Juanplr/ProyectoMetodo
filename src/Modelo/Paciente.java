@@ -14,6 +14,11 @@ public class Paciente {
         this.estado = 0;
     }
 
+    public Paciente(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+    
     public Paciente(int id, String nombre, String fechaN, String estadoC, String nivelEstud, String ocupacion) {
         this.id = id;
         this.nombre = nombre;

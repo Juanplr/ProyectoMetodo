@@ -4,6 +4,7 @@ import Controlador.Conector;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class Modelo {
@@ -163,5 +164,45 @@ public class Modelo {
             PreparedStatement ps = conexion.prepareStatement("update usuarios set nombre_usuario='"+user.getNombreU()+"',rol='"+user.getTipo()+"', nombre_completo='"+user.getNombreC()+"',contrasena_usuario='"+user.getPassw()+"',cedula='"+user.getCedula()+"' where nombre_usuario='"+user.getNombreU()+"';");
             ps.executeUpdate();
         } catch (Exception e) {e.printStackTrace();}
+    }
+    public ArrayList<Usuario> listaPsicologos(){
+        ArrayList<Usuario> lista = new ArrayList<>();
+        Usuario u;
+        ResultSet rs=null;
+        try {
+            conexion = cn.conectar();
+            Statement smt;
+            smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            String sql= "SELECT nombre_usuario, nombre_completo  FROM usuarios where rol ='Psicologo';";
+            rs= smt.executeQuery(sql);
+            while(rs.next()){
+                u = new Usuario(rs.getString(2), rs.getString(1));
+                lista.add(u);
+            }
+        } catch (Exception e) {e.printStackTrace();}
+        return lista;
+    }
+
+    public ArrayList<Paciente> listaPacientes() {
+        ArrayList<Paciente> lista = new ArrayList<>();
+        Paciente u;
+        ResultSet rs=null;
+        try {
+            conexion = cn.conectar();
+            Statement smt;
+            smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            String sql= "SELECT id, nombre  FROM paciente;";
+            rs= smt.executeQuery(sql);
+            while(rs.next()){
+                u = new Paciente(rs.getInt(1), rs.getString(2));
+                lista.add(u);
+            }
+        } catch (Exception e) {e.printStackTrace();}
+        return lista;
+    }
+
+    public ArrayList<String> listaHorariosDisponibles(String UserName, int idHora) {
+        ArrayList<String> lista = new ArrayList<>();
+        return lista;     
     }
 }

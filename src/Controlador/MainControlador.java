@@ -35,7 +35,7 @@ public class MainControlador implements ActionListener{
             home.setVisible(true);
         }
         if(e.getSource() == ventana.btCitas){
-            Calendario home = new Calendario(ventana.user);
+            VentanaCitas home = new VentanaCitas(ventana.user);
             ventana.setVisible(false);
             home.setVisible(true);
         }

@@ -1,6 +1,8 @@
 package Controlador;
 
+import Modelo.Usuario;
 import Vista.Login;
+import Vista.VentanaCitas;
 import Vista.VentanaUsuarios;
 
 
@@ -10,7 +12,7 @@ public class Main {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               Login l =  new Login();
+                VentanaCitas l =  new VentanaCitas(new Usuario());
                l.setDefaultCloseOperation(l.EXIT_ON_CLOSE);
                l.setVisible(true);
                 

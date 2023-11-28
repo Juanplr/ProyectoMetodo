@@ -109,7 +109,7 @@ public class UsuariosControlador implements ActionListener{
         ventana.txtNombre.setText("");
         ventana.txtNomUser.setText("");
         ventana.txtPassw.setText("");
-        ventana.txtTipo.setSelectedIndex(0);;
+        ventana.txtTipo.setSelectedIndex(0);
         ventana.txtCP.setText("");
         ventana.txtNomUser.setEditable(true);
     }
