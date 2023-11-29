@@ -25,7 +25,7 @@ public class VentanaCitas extends javax.swing.JFrame {
         boxHora.addActionListener(oyente);
         boxPacientes.addActionListener(oyente);
         txtFeacha.setEditable(false);
-        calendario.addMouseListener(oyente);
+        calendario.addPropertyChangeListener(oyente);
         this.setLocationRelativeTo(null);
     }
 
@@ -68,6 +68,7 @@ public class VentanaCitas extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Hora");
 
+        boxHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoge", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00" }));
         boxHora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxHoraActionPerformed(evt);

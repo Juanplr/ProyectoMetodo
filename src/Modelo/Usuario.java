@@ -8,7 +8,6 @@ public class Usuario {
     private String passw;
     private String tipo;
     private int cedula;
-    private int IdHora;
 
     public Usuario(String nombreC, String nombreU, String passw, String tipo, int cedula) {
         this.nombreC = nombreC;
@@ -18,13 +17,6 @@ public class Usuario {
         this.cedula = cedula;
     }
 
-    public void setIdHora(int IdHora) {
-        this.IdHora = IdHora;
-    }
-
-    public int getIdHora() {
-        return IdHora;
-    }
 
     public Usuario(String nombreC, String nombreU) {
         this.nombreC = nombreC;

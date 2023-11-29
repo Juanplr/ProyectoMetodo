@@ -200,9 +200,25 @@ public class Modelo {
         } catch (Exception e) {e.printStackTrace();}
         return lista;
     }
-
-    public ArrayList<String> listaHorariosDisponibles(String UserName, int idHora) {
-        ArrayList<String> lista = new ArrayList<>();
-        return lista;     
+    public void agregrarCita(Cita cita){
+        try{
+            conexion = cn.conectar();
+            PreparedStatement ps = conexion.prepareStatement("INSERT INTO `cita`(`nombre_usuario`,`id`,`fechaC`,`hora`) VALUES (?,?,?,?);");
+            ps.setString(1, cita.getNombreU());
+            ps.setInt(2, cita.getId());
+            ps.setString(3, cita.getFecha());
+            ps.setString(4, cita.getHora());
+            ps.execute(); 
+            ps.close(); 
+            cn.cerrarconexion(); 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void editarCita(Cita cita){
+        
+    }
+    public void eliminarCita(Cita cita){
+        
     }
 }
