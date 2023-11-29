@@ -63,6 +63,7 @@ nombre_usuario varchar(30),
 id integer,
 fechaC varchar(40) not null,
 hora varchar(10) not null,
+descripcion varchar(100) null,
 primary key(nombre_usuario, id),
 foreign key(nombre_usuario) references usuarios(nombre_usuario),
 foreign key(id) references paciente(id)
@@ -73,6 +74,24 @@ create table registro(
 id integer primary key AUTO_INCREMENT,
 informacion varchar(50)
 );
+#Vista de Citas
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `metodologias_2`.`citasvista` AS
+    SELECT 
+        `p`.`Nombre` AS `Paciente`,
+        `u`.`nombre_completo` AS `Psicologo`,
+        `t`.`fechaC` AS `Fecha`,
+        `t`.`hora` AS `Hora`
+    FROM
+        ((`metodologias_2`.`cita` `t`
+        JOIN `metodologias_2`.`paciente` `p`)
+        JOIN `metodologias_2`.`usuarios` `u`)
+    WHERE
+        ((`u`.`nombre_usuario` = `t`.`nombre_usuario`)
+            AND (`p`.`Id` = `t`.`id`));
         
 insert into usuarios values("admin","Administrador","JJ","qwerty",1234572);
 insert into usuarios values("soka","Psicologo","Juan Pablo Lazaro Ruiz","Perrotonto",12345);
