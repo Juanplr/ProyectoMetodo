@@ -38,7 +38,6 @@ public class CitasControlador  implements ActionListener, PropertyChangeListener
         for (int i = 0; i < pacientes.size(); i++) {
             ventana.boxPacientes.addItem(pacientes.get(i).getNombre());
         }
-        ventana.boxHora.addItem("Elejir");
     }
     
     
@@ -73,7 +72,6 @@ public class CitasControlador  implements ActionListener, PropertyChangeListener
             String hora = ventana.boxHora.getSelectedItem().toString();
             Cita cita = new Cita(nombre, id, fecha, hora);
             modelo.agregrarCita(cita);
-            iniciar();
             limpiar();
         }
     }

@@ -19,7 +19,6 @@ public class MainWindow extends javax.swing.JFrame {
         btPacientes.addActionListener(controlador);
         btnUsuarios.addActionListener(controlador);
         btCitas.addActionListener(controlador);
-        btCalendario.addActionListener(controlador);
         btnHistorialP.addActionListener(controlador);
         btnAdminCitas.addActionListener(controlador);
         btSalir.addActionListener(controlador);
@@ -36,7 +35,6 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btPacientes = new javax.swing.JButton();
         btnAdminCitas = new javax.swing.JButton();
-        btCalendario = new javax.swing.JButton();
         btnHistorialP = new javax.swing.JButton();
         btnUsuarios = new javax.swing.JButton();
         btCitas = new javax.swing.JButton();
@@ -55,19 +53,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         btnAdminCitas.setText("Administar Citas");
         jPanel1.add(btnAdminCitas);
-        btnAdminCitas.setBounds(30, 160, 130, 32);
-
-        btCalendario.setText("Calendario");
-        jPanel1.add(btCalendario);
-        btCalendario.setBounds(350, 90, 110, 32);
+        btnAdminCitas.setBounds(100, 160, 130, 32);
 
         btnHistorialP.setText("Historial De Pacientes");
         jPanel1.add(btnHistorialP);
-        btnHistorialP.setBounds(180, 160, 160, 32);
+        btnHistorialP.setBounds(260, 160, 160, 32);
 
         btnUsuarios.setText("Usuarios");
         jPanel1.add(btnUsuarios);
-        btnUsuarios.setBounds(360, 160, 90, 32);
+        btnUsuarios.setBounds(360, 90, 90, 32);
 
         btCitas.setText("Citas");
         jPanel1.add(btCitas);
@@ -112,7 +106,6 @@ public class MainWindow extends javax.swing.JFrame {
         this.repaint();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btCalendario;
     public javax.swing.JButton btCitas;
     public javax.swing.JButton btPacientes;
     public javax.swing.JButton btSalir;
@@ -130,7 +123,6 @@ public class MainWindow extends javax.swing.JFrame {
             btPacientes.setVisible(true);
             btnUsuarios.setVisible(false);
             btCitas.setVisible(true);
-            btCalendario.setVisible(true);
             btnHistorialP.setVisible(false);
             btnAdminCitas.setVisible(true);
         }
@@ -138,7 +130,6 @@ public class MainWindow extends javax.swing.JFrame {
             btPacientes.setVisible(true);
             btnUsuarios.setVisible(false);
             btCitas.setVisible(true);
-            btCalendario.setVisible(true);
             btnHistorialP.setVisible(true);
             btnAdminCitas.setVisible(true);
         }
@@ -146,7 +137,6 @@ public class MainWindow extends javax.swing.JFrame {
             btPacientes.setVisible(true);
             btnUsuarios.setVisible(true);
             btCitas.setVisible(true);
-            btCalendario.setVisible(true);
             btnHistorialP.setVisible(true);
             btnAdminCitas.setVisible(true);
         }

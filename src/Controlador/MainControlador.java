@@ -44,14 +44,13 @@ public class MainControlador implements ActionListener{
             ventana.setVisible(false);
             home.setVisible(true);
         }
-        if(e.getSource() == ventana.btCalendario){
-           
-        }
         if(e.getSource() == ventana.btnAdminCitas){
-           
+          
         }
         if(e.getSource() == ventana.btnHistorialP){
-           
+            Consultas home = new Consultas(ventana.user);
+            ventana.setVisible(false);
+            home.setVisible(true);
         }
     }
     

@@ -10,6 +10,7 @@ package Modelo;
  */
 public class Cita {
     private String NombreU;
+    private String Paciente;
     private int id;
     private String fecha;
     private String hora;
@@ -17,6 +18,13 @@ public class Cita {
     public Cita(String NombreU, int id, String fecha, String hora) {
         this.NombreU = NombreU;
         this.id = id;
+        this.fecha = fecha;
+        this.hora = hora;
+    }
+
+    public Cita(String paciente, String psicologo, String fecha, String hora) {
+        this.NombreU = psicologo;
+        this.Paciente = paciente;
         this.fecha = fecha;
         this.hora = hora;
     }
@@ -51,6 +59,14 @@ public class Cita {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public String getPaciente() {
+        return Paciente;
+    }
+
+    public void setPaciente(String Paciente) {
+        this.Paciente = Paciente;
     }
     
 }

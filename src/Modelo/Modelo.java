@@ -221,4 +221,28 @@ public class Modelo {
     public void eliminarCita(Cita cita){
         
     }
+    public ResultSet getCitas() {
+        ResultSet rs=null;
+        try {
+            conexion = cn.conectar();
+            Statement smt;
+            smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            String sql= "select * from citasVista;";
+            rs= smt.executeQuery(sql);
+            //cn.cerrarconexion();
+        } catch (Exception e) {e.printStackTrace();}
+        return rs;
+    }
+        public ResultSet getCitasPorPaciente(String nombre) {
+        ResultSet rs=null;
+        try {
+            conexion = cn.conectar();
+            Statement smt;
+            smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            String sql= "select * from citasVista where paciente = '" +nombre +"';";
+            rs= smt.executeQuery(sql);
+            //cn.cerrarconexion();
+        } catch (Exception e) {e.printStackTrace();}
+        return rs;
+    }
 }
