@@ -36,48 +36,45 @@ public class PacienteControlador implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Modelo m = new Modelo();
         if(e.getSource()==ventana.btAgregar){
-            try {
-                Paciente np = new Paciente();
-                SimpleDateFormat formato =new SimpleDateFormat("dd-MM-yyyy");
-                String fecha;
-                fecha = formato.format(ventana.txtFecha.getDate());
-                np.setNombre(ventana.txtNombre.getText());
-                np.setFechaN(fecha);
-                np.setEstadoC(ventana.txtEstadoC.getSelectedItem().toString());
-                np.setNivelEstud(ventana.txtNE.getSelectedItem().toString());
-                np.setOcupacion(ventana.txtOcupacion.getText());  
-
-                // Agrega un mensaje de depuración para verificar los datos antes de agregar el paciente
-                System.out.println("Paciente a agregar: " + np.toString());
-
-                m.agregarPaciente(np);
-                iniciar();
-                limpiar();
-            } catch (NumberFormatException ex) {
-                System.out.println("Error al convertir el ID a entero: " + ex.getMessage());
+            if(validarCampos()){
+                try {
+                    Paciente np = llenarPaciente();
+                    m.agregarPaciente(np);
+                    javax.swing.JOptionPane.showMessageDialog(ventana, "Paciente "+np.getNombre()+" Agregado Correctamente\n", "Bien", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    m.registrar(ventana.user.toString() + " Agrego el Paciente" + np.getNombre());
+                } catch (NumberFormatException ex) {
+                    System.out.println("Error al convertir el ID a entero: " + ex.getMessage());
+                }
+            }else{
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Debes Llenar los Campos\n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
-        }
-        if(e.getSource() == ventana.btModificar){
-            Paciente pa = new Paciente();
-            SimpleDateFormat formato =new SimpleDateFormat("dd-MM-yyyy");
-            String fecha;
-            fecha = formato.format(ventana.txtFecha.getDate());
-            
-            pa.setId(Integer.parseInt(ventana.txtId.getText()));
-            pa.setNombre(ventana.txtNombre.getText());
-            pa.setFechaN(fecha);
-            pa.setEstadoC(ventana.txtEstadoC.getSelectedItem().toString());
-            pa.setNivelEstud(ventana.txtNE.getSelectedItem().toString());
-            pa.setOcupacion(ventana.txtOcupacion.getText());
-            m.ActualizarPaciente(pa);
             iniciar();
             limpiar();
-            ventana.txtId.setEnabled(true);
+        }
+        if(e.getSource() == ventana.btModificar){
+           if(validarCampos()){
+                Paciente np = llenarPaciente();
+                np.setId(Integer.parseInt(ventana.txtId.getText()));
+                m.ActualizarPaciente(np);
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Paciente "+np.getNombre()+" Actualizado Correctamente\n", "Bien", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                m.registrar(ventana.user.toString() + " Modifico el Paciente" + np.getNombre());
+           }else{
+               javax.swing.JOptionPane.showMessageDialog(ventana, "Debes Seleccionar un Paciente Primero\n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
+           }
+           iniciar();
+           limpiar();
+           ventana.txtId.setEnabled(true);
         }
         if(e.getSource()==ventana.btEliminar){
-            Paciente a = new Paciente();
-            a.setId(Integer.parseInt(ventana.txtId.getText()));
-            modelo.PapeleriaPaciente(a);
+            if(validarCampos()){
+                Paciente np = llenarPaciente();
+                np.setId(Integer.parseInt(ventana.txtId.getText()));
+                modelo.PapeleriaPaciente(np);
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Paciente "+np.getNombre()+" En papeleria de Reciclaje\n", "Bien", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                m.registrar(ventana.user.toString() + " Mando a la Papeleria al Paciente" + np.getNombre());
+           }else{
+               javax.swing.JOptionPane.showMessageDialog(ventana, "Debes Seleccionar un Paciente Primero\n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
+           }
             iniciar();
             limpiar();
             ventana.txtId.setEnabled(true);
@@ -99,5 +96,19 @@ public class PacienteControlador implements ActionListener{
         ventana.txtId.setVisible(false);
         ventana.jLabel1.setVisible(false);
     }
-    
+    private boolean  validarCampos(){
+        return !("".equals(ventana.txtNombre.getText()) || "".equals(ventana.txtOcupacion.getText()) || ventana.txtEstadoC.getSelectedItem()=="Selecciona" || ventana.txtNE.getSelectedItem()=="Selecciona" || ventana.txtFecha.getDate().toString() =="");
+    }
+    private Paciente llenarPaciente(){
+        Paciente auxiliar = new Paciente();
+        SimpleDateFormat formato =new SimpleDateFormat("dd-MM-yyyy");
+        String fecha;
+        fecha = formato.format(ventana.txtFecha.getDate());
+        auxiliar.setNombre(ventana.txtNombre.getText());
+        auxiliar.setFechaN(fecha);
+        auxiliar.setEstadoC(ventana.txtEstadoC.getSelectedItem().toString());
+        auxiliar.setNivelEstud(ventana.txtNE.getSelectedItem().toString());
+        auxiliar.setOcupacion(ventana.txtOcupacion.getText());  
+        return auxiliar;
+    }
 }

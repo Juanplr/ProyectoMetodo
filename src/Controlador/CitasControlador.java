@@ -63,15 +63,25 @@ public class CitasControlador  implements ActionListener, PropertyChangeListener
             int i = ventana.boxPsicologos.getSelectedIndex();
             if(i!=0){
                 UserName = psicologos.get(i-1).getNombreU();
+                if(ventana.txtFeacha.getText()!=""){
+                    ventana.boxHora.setModel(modelo.hoarios(UserName,ventana.txtFeacha.getText()));
+                }
             }
+            
         }
         if(e.getSource()==ventana.btnAgendar){
-            String nombre = UserName;
-            int id = this.id;
-            String fecha = ventana.txtFeacha.getText();
-            String hora = ventana.boxHora.getSelectedItem().toString();
-            Cita cita = new Cita(nombre, id, fecha, hora);
-            modelo.agregrarCita(cita);
+            if(validar()){
+                String nombre = UserName;
+                int id = this.id;
+                String fecha = ventana.txtFeacha.getText();
+                String hora = ventana.boxHora.getSelectedItem().toString();
+                Cita cita = new Cita(nombre, id, fecha, hora);
+                modelo.agregrarCita(cita);
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Cita "+cita.getId()+" Agregado Correctamente\n", "Bien", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                modelo.registrar(ventana.user.toString() + " Agrego la cita " + cita.getId() );
+            }else{
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Debes Llenar los campos\n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
             limpiar();
         }
     }
@@ -91,6 +101,12 @@ public class CitasControlador  implements ActionListener, PropertyChangeListener
             fecha = formato.format(ventana.calendario.getDate());
             ventana.txtFeacha.setText(fecha);
         }
+        int i = ventana.boxPsicologos.getSelectedIndex();
+        if(i!=0){
+            ventana.boxHora.setModel(modelo.hoarios(UserName,ventana.txtFeacha.getText()));
+        }
     }
-    
+    private boolean validar(){
+        return !("".equals(ventana.txtFeacha.getText()) || "Escoge".equals(ventana.boxHora.getSelectedItem()) || ventana.boxPacientes.getSelectedItem()=="Seleciona" || ventana.boxPsicologos.getSelectedItem()=="Seleciona");
+    }
 }

@@ -5,6 +5,9 @@ import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class Modelo {
@@ -191,7 +194,7 @@ public class Modelo {
             conexion = cn.conectar();
             Statement smt;
             smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            String sql= "SELECT id, nombre  FROM paciente;";
+            String sql= "SELECT id, nombre  FROM paciente where papeleria = 0;";
             rs= smt.executeQuery(sql);
             while(rs.next()){
                 u = new Paciente(rs.getInt(1), rs.getString(2));
@@ -245,4 +248,56 @@ public class Modelo {
         } catch (Exception e) {e.printStackTrace();}
         return rs;
     }
+
+    public void registrar(String informacion) {
+         try {
+            conexion = cn.conectar();
+            PreparedStatement ps = conexion.prepareStatement("INSERT INTO registro (informacion) VALUES (?)");
+            ps.setString(1, informacion);
+            ps.execute(); 
+            ps.close(); 
+            cn.cerrarconexion(); 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public ComboBoxModel<String> hoarios(String UserName, String fechaC) {
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<String> aux = new DefaultComboBoxModel<>();
+        comboBoxModel.addElement("Escoge");
+        ResultSet rs=null;
+        for (int i = 8; i <= 16; i++) {
+            String hora = i+":00";
+            comboBoxModel.addElement(hora);
+        }
+        try {
+            conexion = cn.conectar();
+            Statement smt;
+            smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            String sql= "select hora from cita where nombre_usuario = '" +UserName +"' and fechaC = '" +fechaC +"';";
+            rs= smt.executeQuery(sql);
+            while(rs.next()){
+                aux.addElement(rs.getString(1));
+                System.out.println(rs.getString(1));
+                comboBoxModel = eliminarh(rs.getString(1),comboBoxModel);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }catch(NoSuchElementException x ){
+            
+        }
+        return comboBoxModel;
+    }
+
+    private DefaultComboBoxModel<String> eliminarh(String string, DefaultComboBoxModel<String> comboBoxModel) {
+        for (int i = 0; i < comboBoxModel.getSize(); i++) {
+            if(string.equals(comboBoxModel.getElementAt(i))){
+                comboBoxModel.removeElementAt(i);
+            }
+        }
+        return comboBoxModel;
+    }
+
+
 }

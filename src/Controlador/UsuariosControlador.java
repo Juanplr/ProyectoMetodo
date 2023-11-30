@@ -28,48 +28,38 @@ public class UsuariosControlador implements ActionListener{
             home.setVisible(true);
         }
         if(e.getSource()== ventana.btnAgregar){
-            Usuario user;
-            int cedula;
-            String nombreC = ventana.txtNombre.getText();
-            String nombreU = ventana.txtNomUser.getText();
-            String passw = new String(ventana.txtPassw.getPassword());
-            String tipo = ventana.txtTipo.getSelectedItem().toString();
-            if("Asistente".equals(tipo)||"Administrador".equals(tipo)){
-                user = new Usuario(nombreC, nombreU, passw, tipo);
+            if(validarCampos()){
+                Usuario user = llenarUsuario();
+                modelo.agregarUsuario(user);
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Usuario "+user.getNombreC()+" Agregado\n", "Bien", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                modelo.registrar(ventana.user.toString() + "Agregro a: " + user.getNombreC());
             }else{
-                cedula = Integer.parseInt(ventana.txtCP.getText());
-                user = new Usuario(nombreC, nombreU, passw, tipo, cedula);
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Debes Llenar los Campos\n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
-            modelo.agregarUsuario(user);
             iniciar();
             limpiar();
         }
         if(e.getSource()== ventana.btnEditar){
-            Usuario user;
-            int cedula;
-            String nombreC = ventana.txtNombre.getText();
-            String nombreU = ventana.txtNomUser.getText();
-            String passw = new String(ventana.txtPassw.getPassword());
-            String tipo = ventana.txtTipo.getSelectedItem().toString();
-            if("Asistente".equals(tipo)){
-                user = new Usuario(nombreC, nombreU, passw, tipo);
+            if(validarCampos()){
+                Usuario user = llenarUsuario();
+                modelo.EditarUsuario(user);
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Usuario "+user.getNombreC()+" Editado\n", "Bien", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                modelo.registrar(ventana.user.toString() + "Edito a: " + user.getNombreC());
             }else{
-                cedula = Integer.parseInt(ventana.txtCP.getText());
-                user = new Usuario(nombreC, nombreU, passw, tipo, cedula);
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Debes Llenar los Campos\n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
-            modelo.EditarUsuario(user);
             iniciar();
             limpiar();
         }
         if(e.getSource()== ventana.btnEliminar){
-            Usuario user;
-            int cedula = 0;
-            String nombreC = ventana.txtNombre.getText();
-            String nombreU = ventana.txtNomUser.getText();
-            String passw = new String(ventana.txtPassw.getPassword());
-            String tipo = ventana.txtTipo.getSelectedItem().toString();
-            user = new Usuario(nombreC, nombreU, passw, tipo, cedula);
-            modelo.eliminarUsuario(user);
+            if(validarCampos()){
+                Usuario user = llenarUsuario();
+                modelo.eliminarUsuario(user);
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Usuario "+user.getNombreC()+" Eliminado\n", "Bien", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                modelo.registrar(ventana.user.toString() + "Elimino a: " + user.getNombreC());
+            }else{
+                javax.swing.JOptionPane.showMessageDialog(ventana, "Debes Llenar los Campos\n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
             iniciar();
             limpiar();
         }
@@ -114,6 +104,26 @@ public class UsuariosControlador implements ActionListener{
         ventana.txtNomUser.setEditable(true);
     }
     
-    
-    
+    private boolean validarCampos(){
+        boolean verificar = true;
+        if("".equals(ventana.txtNombre.getText())||"".equals(ventana.txtNomUser.getText())||"".equals(ventana.txtPassw.getPassword().toString())||"Ingrese un tipo".equals(ventana.txtTipo.getSelectedItem())){
+            verificar = false;
+        }
+       return verificar;
+    }
+    private Usuario llenarUsuario(){
+        Usuario user;
+        int cedula;
+        String nombreC = ventana.txtNombre.getText();
+        String nombreU = ventana.txtNomUser.getText();
+        String passw = new String(ventana.txtPassw.getPassword());
+        String tipo = ventana.txtTipo.getSelectedItem().toString();
+        if("Asistente".equals(tipo)||"Administrador".equals(tipo)){
+            user = new Usuario(nombreC, nombreU, passw, tipo);
+        }else{
+            cedula = Integer.parseInt(ventana.txtCP.getText());
+            user = new Usuario(nombreC, nombreU, passw, tipo, cedula);
+        }
+        return user;
+    }
 }

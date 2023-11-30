@@ -11,8 +11,7 @@ public class Main {
             public void run() {
                Login l =  new Login();
                l.setDefaultCloseOperation(l.EXIT_ON_CLOSE);
-               l.setVisible(true);
-                
+               l.setVisible(true);     
             }
         });
     }

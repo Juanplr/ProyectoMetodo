@@ -13,20 +13,6 @@ public class MainControlador implements ActionListener{
     public MainControlador(MainWindow ventana) {
         this.ventana = ventana;
     }
-
-    public MainWindow getVentana() {
-        return ventana;
-    }
-
-    public Modelo getModelo() {
-        return modelo;
-    }
-
-    public void setVentana(MainWindow ventana) {
-        this.ventana = ventana;
-    }
-    
-    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== ventana.btPacientes){
@@ -49,6 +35,11 @@ public class MainControlador implements ActionListener{
         }
         if(e.getSource() == ventana.btnHistorialP){
             Consultas home = new Consultas(ventana.user);
+            ventana.setVisible(false);
+            home.setVisible(true);
+        }
+        if(e.getSource()== ventana.btSalir){
+            Login home = new Login();
             ventana.setVisible(false);
             home.setVisible(true);
         }
