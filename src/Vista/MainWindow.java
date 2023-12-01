@@ -22,6 +22,7 @@ public class MainWindow extends javax.swing.JFrame {
         btnHistorialP.addActionListener(controlador);
         btnAdminCitas.addActionListener(controlador);
         btSalir.addActionListener(controlador);
+        btCalendario.addActionListener(controlador);
         perfil();
         this.setSize(490, 390);
         this.setLocationRelativeTo(null);  
@@ -32,8 +33,10 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btPacientes = new javax.swing.JButton();
+        btCalendario = new javax.swing.JButton();
         btnAdminCitas = new javax.swing.JButton();
         btnHistorialP = new javax.swing.JButton();
         btnUsuarios = new javax.swing.JButton();
@@ -43,29 +46,35 @@ public class MainWindow extends javax.swing.JFrame {
         circulo = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
+        jButton1.setText("jButton1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(null);
 
         btPacientes.setText("Pacientes");
         jPanel1.add(btPacientes);
-        btPacientes.setBounds(40, 90, 120, 32);
+        btPacientes.setBounds(30, 90, 120, 32);
+
+        btCalendario.setText("Calendario");
+        jPanel1.add(btCalendario);
+        btCalendario.setBounds(350, 90, 100, 32);
 
         btnAdminCitas.setText("Administar Citas");
         jPanel1.add(btnAdminCitas);
-        btnAdminCitas.setBounds(100, 160, 130, 32);
+        btnAdminCitas.setBounds(20, 160, 130, 32);
 
         btnHistorialP.setText("Historial De Pacientes");
         jPanel1.add(btnHistorialP);
-        btnHistorialP.setBounds(260, 160, 160, 32);
+        btnHistorialP.setBounds(320, 160, 160, 32);
 
         btnUsuarios.setText("Usuarios");
         jPanel1.add(btnUsuarios);
-        btnUsuarios.setBounds(360, 90, 90, 32);
+        btnUsuarios.setBounds(200, 160, 90, 32);
 
         btCitas.setText("Citas");
         jPanel1.add(btCitas);
-        btCitas.setBounds(210, 90, 100, 32);
+        btCitas.setBounds(200, 90, 100, 32);
 
         btSalir.setText("Salir");
         jPanel1.add(btSalir);
@@ -106,6 +115,7 @@ public class MainWindow extends javax.swing.JFrame {
         this.repaint();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btCalendario;
     public javax.swing.JButton btCitas;
     public javax.swing.JButton btPacientes;
     public javax.swing.JButton btSalir;
@@ -115,30 +125,17 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel circulo;
     private javax.swing.JLabel equipo;
     private javax.swing.JLabel fondo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
     private void perfil() {
         if(user.getTipo().equals("Asistente")){
-            btPacientes.setVisible(true);
             btnUsuarios.setVisible(false);
-            btCitas.setVisible(true);
             btnHistorialP.setVisible(false);
-            btnAdminCitas.setVisible(true);
         }
         if(user.getTipo().equals("Psicologo")){
-            btPacientes.setVisible(true);
             btnUsuarios.setVisible(false);
-            btCitas.setVisible(true);
-            btnHistorialP.setVisible(true);
-            btnAdminCitas.setVisible(true);
-        }
-        if(user.getTipo().equals("Administrador")){
-            btPacientes.setVisible(true);
-            btnUsuarios.setVisible(true);
-            btCitas.setVisible(true);
-            btnHistorialP.setVisible(true);
-            btnAdminCitas.setVisible(true);
         }
     }
 }

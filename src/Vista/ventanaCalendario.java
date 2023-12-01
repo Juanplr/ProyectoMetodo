@@ -1,12 +1,22 @@
 package Vista;
 
+import Controlador.CalendarioControlador;
 import Modelo.Usuario;
 
 public class ventanaCalendario extends javax.swing.JFrame {
-    Usuario user;
-    public ventanaCalendario(Usuario user) {
+    public Usuario user;
+    CalendarioControlador controlador = new CalendarioControlador(this);
+    public ventanaCalendario(Usuario user){
+        this.setUndecorated(true);
         this.user = user;
         initComponents();
+        btnCerrar.addActionListener(controlador);
+        boxPsicologos.addActionListener(controlador);
+        txtFecha.addActionListener(controlador);
+        tabla.addMouseListener(controlador);
+        calendario.addMouseListener(controlador);
+        controlador.iniciar();
+        this.setLocationRelativeTo(null);
     }
 
 
@@ -18,7 +28,7 @@ public class ventanaCalendario extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnCerrar = new javax.swing.JButton();
         boxPsicologos = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
 
@@ -32,9 +42,9 @@ public class ventanaCalendario extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(boxPsicologos, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boxPsicologos, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(95, 95, 95)
                 .addComponent(btnCerrar)
                 .addContainerGap())
@@ -46,7 +56,7 @@ public class ventanaCalendario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCerrar)
                     .addComponent(boxPsicologos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -82,7 +92,7 @@ public class ventanaCalendario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -95,7 +105,7 @@ public class ventanaCalendario extends javax.swing.JFrame {
     public com.toedter.calendar.JCalendar calendario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTextField jTextField1;
     public javax.swing.JTable tabla;
+    public javax.swing.JTextField txtFecha;
     // End of variables declaration//GEN-END:variables
 }

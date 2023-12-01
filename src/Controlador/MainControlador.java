@@ -43,6 +43,11 @@ public class MainControlador implements ActionListener{
             ventana.setVisible(false);
             home.setVisible(true);
         }
+        if(e.getSource()== ventana.btCalendario){
+            ventanaCalendario home = new ventanaCalendario(ventana.user);
+            ventana.setVisible(false);
+            home.setVisible(true);
+        }
     }
     
 }
