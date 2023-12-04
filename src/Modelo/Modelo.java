@@ -218,11 +218,23 @@ public class Modelo {
             ex.printStackTrace();
         }
     }
-    public void editarCita(Cita cita){
-        
+    public void editarCita(Cita cita){ 
+        /*try {
+            conexion = cn.conectar();
+            PreparedStatement ps = conexion.prepareStatement("update paciente set nombre='"+p.getNombre()+"',fecha_nacimiento='"+p.getFechaN()+"', estado_civil='"+p.getEstadoC()+"',nivel_estudios='"+p.getNivelEstud()+"',ocupacion='"+p.getOcupacion()+"' where id='"+p.getId()+"';");
+            ps.executeUpdate();
+        } catch (Exception e) {e.printStackTrace();}*/
     }
     public void eliminarCita(Cita cita){
-        
+        try {
+            conexion = cn.conectar();
+            PreparedStatement ps = conexion.prepareStatement("DELETE FROM `cita` WHERE id = '"+cita.getId()+"' and nombre_usuario = '"+cita.getPsicologo()+"' and fechaC ='"+cita.getFecha()+"' and hora = '"+cita.getHora()+"';");
+            ps.execute(); 
+            ps.close(); 
+            cn.cerrarconexion(); 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } 
     }
     public ResultSet getCitas() {
         ResultSet rs=null;
@@ -243,6 +255,30 @@ public class Modelo {
             Statement smt;
             smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             String sql= "select * from citasVista where paciente = '" +nombre +"';";
+            rs= smt.executeQuery(sql);
+            //cn.cerrarconexion();
+        } catch (Exception e) {e.printStackTrace();}
+        return rs;
+    }
+    public ResultSet getCitasPorFecha(String fecha) {
+        ResultSet rs=null;
+        try {
+            conexion = cn.conectar();
+            Statement smt;
+            smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            String sql= "select * from citasVista where Fecha = '" +fecha +"';";
+            rs= smt.executeQuery(sql);
+            //cn.cerrarconexion();
+        } catch (Exception e) {e.printStackTrace();}
+        return rs;
+    }
+    public ResultSet getCitasPorPscologo(String nombre, String fecha) {
+        ResultSet rs=null;
+        try {
+            conexion = cn.conectar();
+            Statement smt;
+            smt=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            String sql= "select * from citasVista where Psicologo = '" +nombre +"' and Fecha = '" +fecha +"';";
             rs= smt.executeQuery(sql);
             //cn.cerrarconexion();
         } catch (Exception e) {e.printStackTrace();}
@@ -279,7 +315,6 @@ public class Modelo {
             rs= smt.executeQuery(sql);
             while(rs.next()){
                 aux.addElement(rs.getString(1));
-                System.out.println(rs.getString(1));
                 comboBoxModel = eliminarh(rs.getString(1),comboBoxModel);
             }
         } catch (SQLException ex) {

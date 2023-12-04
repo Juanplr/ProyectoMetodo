@@ -14,8 +14,9 @@ public class ventanaCalendario extends javax.swing.JFrame {
         boxPsicologos.addActionListener(controlador);
         txtFecha.addActionListener(controlador);
         tabla.addMouseListener(controlador);
-        calendario.addMouseListener(controlador);
+        calendario.addPropertyChangeListener(controlador);
         controlador.iniciar();
+        controlador.fecha();
         this.setLocationRelativeTo(null);
     }
 

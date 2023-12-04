@@ -11,12 +11,24 @@ package Modelo;
 public class Cita {
     private String NombreU;
     private String Paciente;
+    private String Psicologo;
     private int id;
     private String fecha;
     private String hora;
+    private String descripcion;
+    
 
     public Cita(String NombreU, int id, String fecha, String hora) {
         this.NombreU = NombreU;
+        this.id = id;
+        this.fecha = fecha;
+        this.hora = hora;
+    }
+
+    public Cita(String NombreU, String Paciente, String Psicologo, int id, String fecha, String hora) {
+        this.NombreU = NombreU;
+        this.Paciente = Paciente;
+        this.Psicologo = Psicologo;
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
@@ -29,6 +41,22 @@ public class Cita {
         this.hora = hora;
     }
 
+    public Cita(String NombreU, int id, String fecha, String hora, String descripcion) {
+        this.NombreU = NombreU;
+        this.id = id;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.descripcion = descripcion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
     public String getNombreU() {
         return NombreU;
     }
@@ -68,5 +96,14 @@ public class Cita {
     public void setPaciente(String Paciente) {
         this.Paciente = Paciente;
     }
+
+    public String getPsicologo() {
+        return Psicologo;
+    }
+
+    public void setPsicologo(String Psicologo) {
+        this.Psicologo = Psicologo;
+    }
+    
     
 }

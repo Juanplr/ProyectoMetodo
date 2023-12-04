@@ -44,6 +44,12 @@ public class ConsultasControlador implements ActionListener, MouseListener{
     }
     public void iniciar(){
         ventana.tablaCitas.setModel(new PersonalTableModel(modelo.getCitas()));
+        ventana.tablaCitas.getColumnModel().getColumn(4).setPreferredWidth(0); 
+        ventana.tablaCitas.getColumnModel().getColumn(4).setMaxWidth(0);
+        ventana.tablaCitas.getColumnModel().getColumn(4).setMinWidth(0);
+        ventana.tablaCitas.getColumnModel().getColumn(5).setPreferredWidth(0); 
+        ventana.tablaCitas.getColumnModel().getColumn(5).setMaxWidth(0);
+        ventana.tablaCitas.getColumnModel().getColumn(5).setMinWidth(0);
     }
     public void box(){
         ArrayList<Paciente> pacientes = modelo.listaPacientes();
@@ -64,7 +70,9 @@ public class ConsultasControlador implements ActionListener, MouseListener{
             String psicologo = ventana.tablaCitas.getValueAt(fila, 1).toString();
             String fecha = ventana.tablaCitas.getValueAt(fila, 2).toString();
             String hora = ventana.tablaCitas.getValueAt(fila, 3).toString();
-            Cita cita = new Cita(paciente, psicologo, fecha, hora);
+            String username = ventana.tablaCitas.getValueAt(fila, 4).toString();
+            int id =   Integer.parseInt(ventana.tablaCitas.getValueAt(fila, 5).toString());
+            Cita cita = new Cita(psicologo, paciente, username, id, fecha, hora);
             ConsultasDetalladas home = new ConsultasDetalladas(cita, ventana.user);
             home.setVisible(true);
         }

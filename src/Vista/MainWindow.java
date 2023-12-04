@@ -20,7 +20,6 @@ public class MainWindow extends javax.swing.JFrame {
         btnUsuarios.addActionListener(controlador);
         btCitas.addActionListener(controlador);
         btnHistorialP.addActionListener(controlador);
-        btnAdminCitas.addActionListener(controlador);
         btSalir.addActionListener(controlador);
         btCalendario.addActionListener(controlador);
         perfil();
@@ -37,7 +36,6 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btPacientes = new javax.swing.JButton();
         btCalendario = new javax.swing.JButton();
-        btnAdminCitas = new javax.swing.JButton();
         btnHistorialP = new javax.swing.JButton();
         btnUsuarios = new javax.swing.JButton();
         btCitas = new javax.swing.JButton();
@@ -54,27 +52,23 @@ public class MainWindow extends javax.swing.JFrame {
 
         btPacientes.setText("Pacientes");
         jPanel1.add(btPacientes);
-        btPacientes.setBounds(30, 90, 120, 32);
+        btPacientes.setBounds(20, 60, 120, 32);
 
         btCalendario.setText("Calendario");
         jPanel1.add(btCalendario);
-        btCalendario.setBounds(350, 90, 100, 32);
-
-        btnAdminCitas.setText("Administar Citas");
-        jPanel1.add(btnAdminCitas);
-        btnAdminCitas.setBounds(20, 160, 130, 32);
+        btCalendario.setBounds(340, 60, 100, 32);
 
         btnHistorialP.setText("Historial De Pacientes");
         jPanel1.add(btnHistorialP);
-        btnHistorialP.setBounds(320, 160, 160, 32);
+        btnHistorialP.setBounds(80, 110, 160, 32);
 
         btnUsuarios.setText("Usuarios");
         jPanel1.add(btnUsuarios);
-        btnUsuarios.setBounds(200, 160, 90, 32);
+        btnUsuarios.setBounds(280, 110, 90, 32);
 
         btCitas.setText("Citas");
         jPanel1.add(btCitas);
-        btCitas.setBounds(200, 90, 100, 32);
+        btCitas.setBounds(180, 60, 100, 32);
 
         btSalir.setText("Salir");
         jPanel1.add(btSalir);
@@ -119,7 +113,6 @@ public class MainWindow extends javax.swing.JFrame {
     public javax.swing.JButton btCitas;
     public javax.swing.JButton btPacientes;
     public javax.swing.JButton btSalir;
-    public javax.swing.JButton btnAdminCitas;
     public javax.swing.JButton btnHistorialP;
     public javax.swing.JButton btnUsuarios;
     private javax.swing.JLabel circulo;
